@@ -1,0 +1,67 @@
+﻿@model RouteJsonData
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<div class="container">
+    <div class="align-items-start">
+        <form class="form-group" asp-action="CreateRouteData" asp-controller="Home" method="post">
+            @Html.LabelFor(m => m.YardLat, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.YardLat, new { @class = "form-control col-6 col-md-3 " })
+            <br />
+
+            @Html.LabelFor(m => m.YardLng, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.YardLng, new { @class = "col-6 col-sd-3 form-control" })
+            <br />
+
+            @Html.LabelFor(m => m.RoadsFilePath, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.RoadsFilePath, new { @class = "form-control " })
+            <br />
+
+            @Html.LabelFor(m => m.FileName, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.FileName, new { @class = "form-control " })
+            <br />
+
+            @Html.LabelFor(m => m.RouteName, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.RouteName, new { @class = "form-control " })
+            <br />
+
+            <button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>
+            <br />
+            <br />
+            <div class="">
+                <label id="successLbl" class="alert alert-success" role="alert">File created successfully!!!</label>
+                <label id="infoLbl" class="alert alert-info" role="alert">Creating route data file please wait...</label>
+                <label id="errorLbl" class="alert alert-danger" role="alert">Invalid form...</label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        if ('@ViewBag.Status' == 'True') {
+            $("#successLbl").show();
+            $("#infoLbl").hide();
+            $("#errorLbl").hide();
+        } else if ('@ViewBag.Status' == 'False') {
+            $("#successLbl").hide();
+            $("#infoLbl").hide();
+            $("#errorLbl").show();
+        }
+        else {
+            $("#successLbl").hide();
+            $("#infoLbl").hide();
+            $("#errorLbl").hide();
+        }
+    });
+
+    $("#submitBtn").on("click", () => {
+        $("#successLbl").hide();
+        $("#infoLbl").show();
+        $("#errorLbl").hide();
+    });
+</script>
